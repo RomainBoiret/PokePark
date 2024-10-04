@@ -22,7 +22,7 @@ public class PokemonFactory {
             for (Object obj : pokemonData) {
                 JSONObject data = (JSONObject) obj;
 
-                int id = (int) data.get("id");
+                int id = ((Long) data.get("id")).intValue();
                 String name = (String) data.get("name");
                 JSONArray typesArray = (JSONArray) data.get("type");
 
@@ -33,12 +33,15 @@ public class PokemonFactory {
                     secondaryType = Type.valueOf(((String) typesArray.get(1)).toUpperCase());
                 }
 
-                int pv = (int) data.get("pv");
-                int attack = (int) data.get("attack");
-                int defense = (int) data.get("defense");
-                int speed = (int) data.get("speed");
+                int pv = ((Long) data.get("pv")).intValue();
+                int attack = ((Long) data.get("attack")).intValue();
+                int defense = ((Long) data.get("defense")).intValue();
+                int speed = ((Long) data.get("speed")).intValue();
                 String evolution = (String) data.get("evolution");
-                int evolutionLevel = (data.get("evolutionLevel") != null) ? (int) data.get("evolutionLevel") : 0;
+
+                int evolutionLevel = data.get("evolutionLevel") != null
+                        ? ((Long) data.get("evolutionLevel")).intValue()
+                        : 0;
 
                 Pokemon pokemon = new Pokemon(
                     id,
